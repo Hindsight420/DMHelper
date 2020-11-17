@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,8 @@ namespace DMHelper
     {
         bool startPaint;
         Graphics g;
-        int? initX = null;
-        int? initY = null;
+        Point mousePos;
+
 
         public Form1()
         {
@@ -25,21 +26,25 @@ namespace DMHelper
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!MouseButtons.HasFlag(MouseButtons.Left)) startPaint = false;
             if (startPaint)
             {
-                //Setting the Pen BackColor and line Width
                 Pen p = new Pen(Color.Black, 5);
-                //Drawing the line.
-                g.DrawLine(p, new Point(initX ?? e.X, initY ?? e.Y), new Point(e.X, e.Y));
-                initX = e.X;
-                initY = e.Y;
+                g.DrawLine(p, mousePos, e.Location);
+                mousePos = e.Location;
             }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("Hello World!");
             startPaint = true;
+            mousePos = e.Location;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            g.Save();
+
         }
     }
 }
