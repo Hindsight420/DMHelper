@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DMHelper
@@ -14,14 +8,24 @@ namespace DMHelper
     public partial class Form1 : Form
     {
         bool startPaint;
-        Graphics g;
         Point mousePos;
+        Bitmap bmp;
 
 
         public Form1()
         {
             InitializeComponent();
-            g = pictureBox1.CreateGraphics();
+            try
+            {
+                Bitmap newBitmap = new Bitmap(@"..\..\test.bmp");
+                bmp = new Bitmap(newBitmap);
+                newBitmap.Dispose();
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("test.bmp file not found, creating new");
+                bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -30,7 +34,11 @@ namespace DMHelper
             if (startPaint)
             {
                 Pen p = new Pen(Color.Black, 5);
-                g.DrawLine(p, mousePos, e.Location);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.DrawLine(p, mousePos, e.Location);
+                }
+                pictureBox1.Image = bmp;
                 mousePos = e.Location;
             }
         }
@@ -43,7 +51,9 @@ namespace DMHelper
 
         private void button1_Click(object sender, EventArgs e)
         {
-            g.Save();
+            pictureBox2.Image = bmp;
+
+            bmp.Save(@"..\..\test.bmp");
 
         }
     }
