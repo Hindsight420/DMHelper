@@ -15,6 +15,11 @@ namespace DMHelper
         public Form1()
         {
             InitializeComponent();
+            LoadImage();
+        }
+
+        void LoadImage()
+        {
             try
             {
                 Bitmap newBitmap = new Bitmap(@"..\..\test.bmp");
@@ -26,6 +31,7 @@ namespace DMHelper
                 Console.WriteLine("test.bmp file not found, creating new");
                 bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             }
+            pictureBox1.Image = bmp;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -54,7 +60,6 @@ namespace DMHelper
             pictureBox2.Image = bmp;
 
             bmp.Save(@"..\..\test.bmp");
-
         }
     }
 }
