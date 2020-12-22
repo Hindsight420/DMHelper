@@ -15,12 +15,13 @@ namespace DMHelper
     {
         PictureBox[,] grid;
         int xDiff, yDiff;
-        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        string baseDir = @"..\..\Images\";
 
         public Form2()
         {
             InitializeComponent();
-            grid = new PictureBox[3, 3];
+            GetArraySize();
+            LoadGrid();
         }
 
         Bitmap LoadImage(int x, int y)
@@ -28,7 +29,8 @@ namespace DMHelper
             Bitmap bmp;
             try
             {
-                Bitmap newBitmap = new Bitmap(@"..\..\" + x + "_" + y + ".bmp");
+                Console.WriteLine(baseDir + x + "_" + y + ".bmp");
+                Bitmap newBitmap = new Bitmap(baseDir + x + "_" + y + ".bmp");
                 bmp = new Bitmap(newBitmap);
                 newBitmap.Dispose();
             }
@@ -46,7 +48,9 @@ namespace DMHelper
             {
                 for (int y = 0; y < grid.GetLength(1); y++)
                 {
+                    grid[x, y] = new PictureBox();
                     grid[x, y].Image = LoadImage(x + xDiff, y + yDiff);
+
                 }
             }
         }
@@ -58,7 +62,9 @@ namespace DMHelper
             int highestY = 0;
             int lowestY = 0;
 
-            List<string> filenames = Directory.EnumerateFiles(baseDir).ToList();
+            var filenames = from fullFilename
+                            in Directory.EnumerateFiles(baseDir)
+                            select Path.GetFileNameWithoutExtension(fullFilename);
             foreach (string filename in filenames)
             {
                 string[] split = filename.Split('_');
@@ -71,7 +77,7 @@ namespace DMHelper
                 if (y > lowestY) lowestY = y;
             }
 
-            grid = new PictureBox[highestX - lowestX, highestY - lowestY];
+            grid = new PictureBox[highestX - lowestX + 1, highestY - lowestY + 1];
             xDiff = lowestX;
             yDiff = lowestY;
         }
