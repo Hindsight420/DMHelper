@@ -42,7 +42,7 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox1.Location = new System.Drawing.Point(305, 47);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(282, 270);
+            this.pictureBox1.Size = new System.Drawing.Size(300, 300);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -56,7 +56,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(646, 608);
+            this.panel1.Size = new System.Drawing.Size(672, 669);
             this.panel1.TabIndex = 1;
             // 
             // button1
@@ -72,9 +72,9 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Info;
-            this.pictureBox2.Location = new System.Drawing.Point(305, 323);
+            this.pictureBox2.Location = new System.Drawing.Point(305, 354);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(282, 270);
+            this.pictureBox2.Size = new System.Drawing.Size(300, 300);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 605);
+            this.ClientSize = new System.Drawing.Size(681, 678);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
